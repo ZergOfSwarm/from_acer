@@ -12,7 +12,7 @@ spath="/snapshots/"
 #Старые бэкапы удаляем, если находим сегодняшний снапшот выходим 
 btrfs subvolume list $path |grep Denis_root |sed -e '1,$ s/.*_//g'| while read ONE_OF_LIST
 do
-if [[ "$ONE_OF_LIST" -lt "$day - $dayexp"  ]]
+if [[ "$ONE_OF_LIST" -le "$day - $dayexp"  ]] # Было -lt но, тогда удаляет dayexp+1 
 then
 echo "remove: $spath"Denis_root_"$ONE_OF_LIST"
 btrfs subvolume delete $spath"Denis_root_"$ONE_OF_LIST
